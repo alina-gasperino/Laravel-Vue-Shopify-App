@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreateShops extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('shops', function (Blueprint $table) {
+            $table->id();
+            $table->bigInteger('user_id')->unsigned();
+            $table->string('shop_name');
+            $table->dateTime('order_history_last_updated')->nullable();
+            $table->timestamps();
+            $table->index('order_history_last_updated');
+            $table->index('user_id');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('shops');
+    }
+}
